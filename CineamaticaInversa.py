@@ -1,13 +1,20 @@
 import numpy as np
 import math
-import DH as DH_VALUE
 import Funciones as Func
-DH = np.empty((4,4))
-############ LLENADO DE TABLA DH##########
-DH[0][0]=DH_VALUE.A1;DH[0][1]=DH_VALUE.alpha1;DH[0][2]=DH_VALUE.d1;DH[0][3]=DH_VALUE.theta1;
-DH[1][0]=DH_VALUE.A2;DH[1][1]=DH_VALUE.alpha2;DH[1][2]=DH_VALUE.d2;DH[1][3]=DH_VALUE.theta2;
-DH[2][0]=DH_VALUE.A3;DH[2][1]=DH_VALUE.alpha3;DH[2][2]=DH_VALUE.d3;DH[2][3]=DH_VALUE.theta3;
-DH[3][0]=DH_VALUE.A4;DH[3][1]=DH_VALUE.alpha4;DH[3][2]=DH_VALUE.d4;DH[3][3]=DH_VALUE.theta4;
-##########################################
+import ConstantesRRR as C
 
-print(DH)
+
+#DEFINE POSITION
+Xc = 6
+Yc = 4
+Zc = 10
+#########(########
+D = ((Xc**2)+(Yc**2)+((Zc-C.d1)**2)-(C.a3)-(C.a2))/(2*C.a2*C.a3)
+print(D)
+Theta1 = math.degrees(np.arctan2(Yc,Xc))
+Theta3a = math.degrees(np.arctan2(math.sqrt(1-D**2),D))
+Theta3b = math.degrees(np.arctan2(-math.sqrt(1-D**2),D))
+Theta2a = math.degrees(np.arctan2((Zc-C.d1),(math.sqrt(Xc**2+Yc**2)))-np.arctan2(C.a3*math.sin(Theta3a),C.a2+C.a3*math.cos(Theta3a)))
+Theta2b = math.degrees(np.arctan2((Zc-C.d1),(math.sqrt(Xc**2+Yc**2)))-np.arctan2(C.a3*math.sin(Theta3b),C.a2+C.a3*math.cos(Theta3b)))
+A= [[Theta1,Theta2a,Theta3a],[Theta1,Theta2b,Theta3b]]
+print(A)

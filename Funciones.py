@@ -4,7 +4,7 @@ import numpy as np
 def Tx(value):
     TX = np.identity(4)
     TX [0][3] = value
-    return Tx
+    return TX
 
 def Ty(value):
     TY = np.identity(4)
